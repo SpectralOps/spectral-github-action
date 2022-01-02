@@ -1,0 +1,12 @@
+name: "Spectral Scan"
+description: "Install Spectral into your PATH"
+inputs:
+  spectral-dsn:
+    description: "Your Spectral DSN"
+    required: true
+branding:
+  icon: "download"
+  color: "purple"
+runs:
+  using: "node12"
+  main: "index.js"

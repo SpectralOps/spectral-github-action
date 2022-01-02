@@ -1,0 +1,42 @@
+name: CI
+
+# Controls when the workflow will run 
+on: [push, workflow_dispatch]
+
+env:
+  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
+
+jobs:
+  ubuntu:
+    name: Spectral ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Spectral
+        uses: ./
+        with:
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+      - name: Spectral Scan
+        run: spectral scan
+  macOS:
+    name: Spectral macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Spectral
+        uses: ./
+        with:
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+      - name: Spectral Scan
+        run: spectral scan
+  windows:
+    name: Spectral windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Spectral
+        uses: ./
+        with:
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+      - name: Spectral Scan
+        run: spectral.exe scan
