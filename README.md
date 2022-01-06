@@ -34,7 +34,7 @@ You can see an example of this Action [here](https://github.com/SpectralOps/spec
 You'll need to provide Spectral dsn. You can do so via the `SPECTRAL_DSN` environment variable. In the below example, the Spectral dsn is retrieved from [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
 ```yaml
-name: Example action
+name: Spectral
 
 on: [push]
 
@@ -42,7 +42,7 @@ env:
   SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
-  my-job:
+  scan:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
