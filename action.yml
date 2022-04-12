@@ -1,5 +1,5 @@
 name: "Spectral Scan"
-description: "Install Spectral into your PATH"
+description: "Automated Secrets, Misconfiguration, and IaC Misconfiguration detection by SpectralOps"
 inputs:
   spectral-dsn:
     description: "Your Spectral DSN"
