@@ -16,7 +16,7 @@ jobs:
         uses: spectralops/spectral-github-action@v2
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
-          spectral-args: --ok --include-tags base,audit,iac
+          spectral-args: --ok
 
   macOS:
     name: Spectral macOS
@@ -27,6 +27,7 @@ jobs:
         uses: spectralops/spectral-github-action@v2
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+          spectral-args: --ok
       - name: Spectral Scan
         run: spectral scan
   windows:
@@ -38,5 +39,6 @@ jobs:
         uses: spectralops/spectral-github-action@v2
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+          spectral-args: --ok
       - name: Spectral Scan
         run: spectral.exe scan
