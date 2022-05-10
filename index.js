@@ -49,7 +49,7 @@ async function installExecutable(path) {
 
 function runSpectral() {
     const spectralArgs = core.getInput('spectral-args')
-    const spectralCommand = `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs}`
-    process.stdout = execSync(spectralCommand)
-    console.log(Buffer.from(stdout).toString("utf-8"))
+    const spectralCommand = `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs || ''}`
+    const output = execSync(spectralCommand)
+    console.log(Buffer.from(output).toString("utf-8"))
 }

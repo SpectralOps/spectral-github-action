@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install and run Spectral
-        uses: spectralops/spectral-github-action@v1
+        uses: spectralops/spectral-github-action@v2
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: --ok --include-tags base,audit,iac
@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Spectral
-        uses: spectralops/spectral-github-action@v1
+        uses: spectralops/spectral-github-action@v2
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
       - name: Spectral Scan
@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Spectral
-        uses: spectralops/spectral-github-action@v1
+        uses: spectralops/spectral-github-action@v2
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
       - name: Spectral Scan
