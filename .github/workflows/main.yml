@@ -1,6 +1,6 @@
 name: CI
 
-# Controls when the workflow will run 
+# Controls when the workflow will run
 on: [push, workflow_dispatch]
 
 env:
@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Spectral
+      - name: Install and run Spectral
         uses: spectralops/spectral-github-action@v1
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
-      - name: Spectral Scan
-        run: spectral scan
+          spectral-args: --ok --include-tags base,audit,iac
+
   macOS:
     name: Spectral macOS
     runs-on: macos-latest
