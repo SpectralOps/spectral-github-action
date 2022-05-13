@@ -54,5 +54,5 @@ async function runSpectral() {
 
 function getScanCommand() {
     const spectralArgs = core.getInput('spectral-args')
-    return `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs}`
+    return `${process.platform === 'win32' ? 'spectral.exe' : 'spectral'} ${spectralArgs}`
 }
