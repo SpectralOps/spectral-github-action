@@ -1,9 +1,10 @@
 const core = require('@actions/core');
 const io = require('@actions/io');
 const tc = require('@actions/tool-cache');
-const { execSync } = require('child_process');
+const exec = require("@actions/exec").exec;
 
 const workspace = process.env.GITHUB_WORKSPACE;
+const spectralDsn = core.getInput('spectral-dsn')
 const binDir = `${workspace}/bin`;
 
 main().catch(error => {
@@ -22,15 +23,14 @@ async function main() {
             await installZip(binDir, 'mac')
             break;
         default:
-            break;
+            throw new Error(`Platform: ${process.platform} is not supported`);
     }
 
     await core.addPath(binDir)
-    runSpectral()
+    await runSpectral()
 }
 
 async function downloadTool(platform) {
-    const spectralDsn = core.getInput('spectral-dsn')
     const url = `${spectralDsn}/latest/dl/${platform}`
     return await tc.downloadTool(url);
 }
@@ -47,9 +47,25 @@ async function installExecutable(path) {
     await io.mv(downloadPath, `${path}/spectral.exe`)
 }
 
-function runSpectral() {
+async function runSpectral() {
+    const scanCommand = getScanCommand()
+    await exec(scanCommand)
+}
+
+function getScanCommand() {
+    const scanType = core.getInput('scan-type')
     const spectralArgs = core.getInput('spectral-args')
-    const spectralCommand = `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs || ''}`
-    const output = execSync(spectralCommand)
-    console.log(Buffer.from(output).toString("utf-8"))
+    switch (scanType.toLowerCase()) {
+        case 'ci':
+            return `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs}`
+        case 'audit':
+            if (process.platform === win32) {
+                return `spectral.exe ${spectralArgs}`
+            }
+            else {
+                return `spectral ${spectralArgs}`
+            }
+        default:
+            throw new Error(`Unknown scan type: ${scanType}`);
+    }
 }

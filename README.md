@@ -22,9 +22,11 @@ Spectral Scan is a single self-contained binary, that's easy to get and use. Thi
 Include this Action as a step in your workflow:
 
 ```
-uses: spectral/spectral-action@v1
+uses: spectral/spectral-action@v2
 with:
-  spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+  spectral-dsn: $SPECTRAL_DSN
+  spectral-args: --ok
+  scan-type: "CI"
 ```
 
 You can see an example of this Action [here](https://github.com/SpectralOps/spectral-github-action/tree/main/.github/workflows/main.yml)
@@ -47,11 +49,36 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Spectral
-      uses: spectralops/spectral-github-action@v1
+      uses: spectralops/spectral-github-action@v2
       with:
-        spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+        spectral-dsn: $SPECTRAL_DSN
+        spectral-args: --ok
     - name: Spectral Scan
       run: spectral scan
+```
+
+Spectral provides another scan option to audit your Github/Gitlab organizaion, user or repo.
+Notice that you need to provide the audit scan type.
+
+```yaml
+name: Spectral
+
+on: [push]
+
+env:
+  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install and run Spectral Audit
+        uses: spectralops/spectral-github-action@v2
+        with:
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+          spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
+          scan-type: "audit"
 ```
 
 ### How to Contribute
