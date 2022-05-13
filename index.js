@@ -53,19 +53,6 @@ async function runSpectral() {
 }
 
 function getScanCommand() {
-    const scanType = core.getInput('scan-type')
     const spectralArgs = core.getInput('spectral-args')
-    switch (scanType.toLowerCase()) {
-        case 'ci':
-            return `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs}`
-        case 'audit':
-            if (process.platform === win32) {
-                return `spectral.exe ${spectralArgs}`
-            }
-            else {
-                return `spectral ${spectralArgs}`
-            }
-        default:
-            throw new Error(`Unknown scan type: ${scanType}`);
-    }
+    return `${process.platform === 'win32' ? 'spectral.exe scan' : 'spectral scan'} ${spectralArgs}`
 }

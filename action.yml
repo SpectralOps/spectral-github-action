@@ -7,10 +7,6 @@ inputs:
   spectral-args:
     description: "Arguments for Spectral scan"
     required: false
-  scan-type:
-    description: "CI or audit"
-    default: "CI"
-    required: false
 branding:
   icon: "download"
   color: "purple"

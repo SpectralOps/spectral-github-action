@@ -26,7 +26,6 @@ uses: spectral/spectral-action@v2
 with:
   spectral-dsn: $SPECTRAL_DSN
   spectral-args: --ok
-  scan-type: "CI"
 ```
 
 You can see an example of this Action [here](https://github.com/SpectralOps/spectral-github-action/tree/main/.github/workflows/main.yml)
@@ -58,7 +57,6 @@ jobs:
 ```
 
 Spectral provides another scan option to audit your Github/Gitlab organizaion, user or repo.
-Notice that you need to provide the audit scan type.
 
 ```yaml
 name: Spectral
@@ -78,7 +76,6 @@ jobs:
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
-          scan-type: "audit"
 ```
 
 ### How to Contribute
