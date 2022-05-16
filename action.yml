@@ -6,7 +6,7 @@ inputs:
     required: true
   spectral-args:
     description: "Arguments for Spectral scan"
-    required: false
+    required: true
 branding:
   icon: "download"
   color: "purple"
