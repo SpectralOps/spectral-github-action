@@ -1,8 +1,10 @@
 const core = require('@actions/core');
 const io = require('@actions/io');
 const tc = require('@actions/tool-cache');
+const exec = require("@actions/exec").exec;
 
 const workspace = process.env.GITHUB_WORKSPACE;
+const spectralDsn = core.getInput('spectral-dsn')
 const binDir = `${workspace}/bin`;
 
 main().catch(error => {
@@ -21,14 +23,14 @@ async function main() {
             await installZip(binDir, 'mac')
             break;
         default:
-            break;
+            throw new Error(`Platform: ${process.platform} is not supported`);
     }
 
     await core.addPath(binDir)
+    await runSpectral()
 }
 
 async function downloadTool(platform) {
-    const spectralDsn = core.getInput('spectral-dsn')
     const url = `${spectralDsn}/latest/dl/${platform}`
     return await tc.downloadTool(url);
 }
@@ -43,4 +45,14 @@ async function installExecutable(path) {
     await io.mkdirP(path);
     const downloadPath = await downloadTool('exe')
     await io.mv(downloadPath, `${path}/spectral.exe`)
+}
+
+async function runSpectral() {
+    const scanCommand = getScanCommand()
+    await exec(scanCommand)
+}
+
+function getScanCommand() {
+    const spectralArgs = core.getInput('spectral-args')
+    return `${process.platform === 'win32' ? 'spectral.exe' : 'spectral'} ${spectralArgs}`
 }

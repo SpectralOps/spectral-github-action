@@ -4,6 +4,9 @@ inputs:
   spectral-dsn:
     description: "Your Spectral DSN"
     required: true
+  spectral-args:
+    description: "Arguments for Spectral scan"
+    required: true
 branding:
   icon: "download"
   color: "purple"
