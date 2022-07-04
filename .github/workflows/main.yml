@@ -15,7 +15,7 @@ jobs:
       - name: Install and run Spectral CI
         uses: spectralops/spectral-github-action@v2
         with:
-          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: scan --ok
   ubuntu-audit:
     name: Spectral ubuntu audit
