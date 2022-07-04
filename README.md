@@ -25,7 +25,7 @@ Include this Action as a step in your workflow:
 uses: spectral/spectral-action@v2
 with:
   spectral-dsn: $SPECTRAL_DSN
-  spectral-args: --ok
+  spectral-args: scan --ok
 ```
 
 You can see an example of this Action [here](https://github.com/SpectralOps/spectral-github-action/tree/main/.github/workflows/main.yml)
