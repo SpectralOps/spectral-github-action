@@ -47,13 +47,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install Spectral
-      uses: spectralops/spectral-github-action@v2
-      with:
-        spectral-dsn: $SPECTRAL_DSN
-        spectral-args: --ok
-    - name: Spectral Scan
-      run: spectral scan
+    - name: Install and run Spectral CI
+        uses: spectralops/spectral-github-action@v2
+        with:
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-args: scan --ok
 ```
 
 Spectral provides another scan option to audit your Github/Gitlab organizaion, user or repo.
@@ -74,7 +72,7 @@ jobs:
       - name: Install and run Spectral Audit
         uses: spectralops/spectral-github-action@v2
         with:
-          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
 ```
 
