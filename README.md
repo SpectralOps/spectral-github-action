@@ -22,7 +22,7 @@ Spectral Scan is a single self-contained binary, that's easy to get and use. Thi
 Include this Action as a step in your workflow:
 
 ```
-uses: spectral/spectral-action@v2
+uses: spectral/spectral-action@v3
 with:
   spectral-dsn: $SPECTRAL_DSN
   spectral-args: scan --ok
@@ -46,9 +46,9 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install and run Spectral CI
-        uses: spectralops/spectral-github-action@v2
+        uses: spectralops/spectral-github-action@v3
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: scan --ok
@@ -68,9 +68,9 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install and run Spectral Audit
-        uses: spectralops/spectral-github-action@v2
+        uses: spectralops/spectral-github-action@v3
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
