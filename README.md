@@ -22,7 +22,7 @@ Spectral Scan is a single self-contained binary, that's easy to get and use. Thi
 Include this Action as a step in your workflow:
 
 ```
-uses: spectral/spectral-action@v3
+uses: spectralops/spectral-github-action@v3
 with:
   spectral-dsn: $SPECTRAL_DSN
   spectral-args: scan --ok
