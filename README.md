@@ -46,8 +46,8 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Install and run Spectral CI
+      - uses: actions/checkout@v3
+      - name: Install and run Spectral CI
         uses: spectralops/spectral-github-action@v3
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
