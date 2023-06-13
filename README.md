@@ -32,15 +32,12 @@ You can see an example of this Action [here](https://github.com/SpectralOps/spec
 
 ## Configuration
 
-You'll need to provide Spectral dsn. You can do so via the `SPECTRAL_DSN` environment variable. In the below example, the Spectral dsn is retrieved from [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+You'll need to provide Spectral DSN as an input variable. You should always store your DSN in a secure way, like below in [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
 ```yaml
 name: Spectral
 
 on: [push]
-
-env:
-  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
   scan:
@@ -50,7 +47,7 @@ jobs:
       - name: Install and run Spectral CI
         uses: spectralops/spectral-github-action@v3
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
 ```
 
@@ -61,9 +58,6 @@ name: Spectral
 
 on: [push]
 
-env:
-  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
-
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -72,7 +66,7 @@ jobs:
       - name: Install and run Spectral Audit
         uses: spectralops/spectral-github-action@v3
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
 ```
 
