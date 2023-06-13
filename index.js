@@ -7,6 +7,9 @@ const workspace = process.env.GITHUB_WORKSPACE;
 const spectralDsn = core.getInput('spectral-dsn')
 const binDir = `${workspace}/bin`;
 
+// Provide SPECTRAL_DSN to spectral binary through env
+core.exportVariable('SPECTRAL_DSN', spectralDsn);
+
 main().catch(error => {
     core.setFailed(error)
 })
