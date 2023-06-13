@@ -51,7 +51,7 @@ jobs:
           spectral-args: scan --ok
 ```
 
-Spectral provides another scan option to audit your Github/Gitlab organizaion, user or repo.
+Spectral provides another scan option to audit your Github/Gitlab organization, user or repo.
 
 ```yaml
 name: Spectral
