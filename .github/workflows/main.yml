@@ -1,10 +1,7 @@
-name: CI
+name: CI (example)
 
 # Controls when the workflow will run
 on: [push, workflow_dispatch]
-
-env:
-  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
   ubuntu-ci:
@@ -13,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral CI
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
   ubuntu-audit:
     name: Spectral ubuntu audit
@@ -23,9 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral Audit
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
   macos-ci:
     name: Spectral macos CI
@@ -33,9 +30,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral CI
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
   macos-audit:
     name: Spectral macos audit
@@ -43,9 +40,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral Audit
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
   windows-ci:
     name: Spectral windows CI
@@ -53,9 +50,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral CI
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
   windows-audit:
     name: Spectral windows audit
@@ -63,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral Audit
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok

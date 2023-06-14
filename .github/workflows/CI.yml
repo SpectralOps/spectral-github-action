@@ -1,10 +1,7 @@
-name: CI
+name: CI on branch
 
 # Controls when the workflow will run
 on: [push, workflow_dispatch, pull_request]
-
-env:
-  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
   ubuntu-ci:
@@ -15,7 +12,7 @@ jobs:
       - name: Install and run Spectral CI
         uses: ./
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
   ubuntu-audit:
     name: Spectral ubuntu audit
@@ -25,7 +22,7 @@ jobs:
       - name: Install and run Spectral Audit
         uses: ./
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
   macos-ci:
     name: Spectral macos CI
@@ -35,7 +32,7 @@ jobs:
       - name: Install and run Spectral CI
         uses: ./
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
   macos-audit:
     name: Spectral macos audit
@@ -45,7 +42,7 @@ jobs:
       - name: Install and run Spectral Audit
         uses: ./
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
   windows-ci:
     name: Spectral windows CI
@@ -55,7 +52,7 @@ jobs:
       - name: Install and run Spectral CI
         uses: ./
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
   windows-audit:
     name: Spectral windows audit
@@ -65,5 +62,5 @@ jobs:
       - name: Install and run Spectral Audit
         uses: ./
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok

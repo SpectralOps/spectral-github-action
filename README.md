@@ -22,7 +22,7 @@ Spectral Scan is a single self-contained binary, that's easy to get and use. Thi
 Include this Action as a step in your workflow:
 
 ```
-uses: spectralops/spectral-github-action@v3
+uses: spectralops/spectral-github-action@v4
 with:
   spectral-dsn: $SPECTRAL_DSN
   spectral-args: scan --ok
@@ -32,15 +32,12 @@ You can see an example of this Action [here](https://github.com/SpectralOps/spec
 
 ## Configuration
 
-You'll need to provide Spectral dsn. You can do so via the `SPECTRAL_DSN` environment variable. In the below example, the Spectral dsn is retrieved from [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+You'll need to provide Spectral DSN as an input variable. You should always store your DSN in a secure way, like below in [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
 ```yaml
 name: Spectral
 
 on: [push]
-
-env:
-  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
   scan:
@@ -48,21 +45,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral CI
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
 ```
 
-Spectral provides another scan option to audit your Github/Gitlab organizaion, user or repo.
+Spectral provides another scan option to audit your Github/Gitlab organization, user or repo.
 
 ```yaml
 name: Spectral
 
 on: [push]
-
-env:
-  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
   scan:
@@ -70,9 +64,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral Audit
-        uses: spectralops/spectral-github-action@v3
+        uses: spectralops/spectral-github-action@v4
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
 ```
 
