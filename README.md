@@ -1,19 +1,11 @@
-<p>
-    <p align="center">
-    <a href="https://checkpoint.com"> 
-        <img alt="SpectralOps logo" src="./logo.svg" width="300"/>
-    </a>
-    </p>
-</p>
-
-# CloudGuard Code Security
+# <img alt="Check Point" src="logo.svg" width="32" /> CloudGuard Code Security
 Spectral is the shift-left solution of Check Point’s CloudGuard to provide the industry’s most comprehensive security platform from code to cloud. Spectral was built as a platform from the ground up to have a fantastic developer experience (DX). Spectral Scan is a single self-contained binary, that's easy to get and use.
 
 ## Example usage
 Include this Action as a step in your workflow:
 
 ```
-uses: spectralops/spectral-github-action@v4
+uses: checkpointsw/spectral-github-action@v4
 with:
   spectral-dsn: $SPECTRAL_DSN
   spectral-args: scan --ok
@@ -35,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral CI
-        uses: spectralops/spectral-github-action@v4
+        uses: checkpointsw/spectral-github-action@v4
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
           spectral-args: scan --ok
@@ -54,14 +46,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and run Spectral Audit
-        uses: spectralops/spectral-github-action@v4
+        uses: checkpointsw/spectral-github-action@v4
         with:
           spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
-          spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/SpectralOps/spectral-github-action --include-tags base,audit --ok
+          spectral-args: github -k repo -t ${{ secrets.MY_GITHUB_TOKEN }} https://github.com/checkpointsw/spectral-github-action --include-tags base,audit --ok
 ```
 
 ### How to Contribute
-We welcome [issues](https://github.com/SpectralOps/spectral-github-action/issues) to and [pull requests](https://github.com/SpectralOps/spectral-github-action/pulls) against this repository!
+We welcome [issues](https://github.com/checkpointsw/spectral-github-action/issues) to and [pull requests](https://github.com/checkpointsw/spectral-github-action/pulls) against this repository!
 
 ## Resources
 - [Solution Review](https://www.checkpoint.com/cloudguard/developer-security/)
