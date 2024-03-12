@@ -11,5 +11,5 @@ branding:
   icon: "download"
   color: "purple"
 runs:
-  using: "node16"
+  using: "node20"
   main: "index.js"
